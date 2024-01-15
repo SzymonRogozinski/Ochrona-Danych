@@ -1,0 +1,39 @@
+﻿@page "/Login"
+@using System.ComponentModel.DataAnnotations
+
+<h3>Login page</h3>
+
+<EditForm Model="userNameQuestionary" OnValidSubmit="xxx">
+	<p>Username:</p>
+	<InputText @bind-Value="userNameQuestionary.value" id="value"></InputText>
+
+	<button class="btn btn-primary" type="submit">x</button>
+</EditForm>
+
+
+<h1>@(tt?"yey":"ney")</h1>
+<h1>@err</h1>
+
+
+
+@code {
+	string test = "";
+	bool tt = false;
+	string err = "";
+
+	private UserNameQuestionary userNameQuestionary = new UserNameQuestionary();
+
+	private async Task xxx()
+	{
+		try
+		{
+			ValidationContext context = new ValidationContext(userNameQuestionary);
+			List<ValidationResult> validationResults = new List<ValidationResult>();
+			tt = Validator.TryValidateObject(userNameQuestionary, context, validationResults, true);
+
+		} catch (Exception e)
+		{
+			err = e.Message;
+		}
+	}
+}
