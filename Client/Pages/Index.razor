@@ -1,7 +1,15 @@
 ﻿@page "/"
 
+@inject TokenHolder TokenHolder
+
 <PageTitle>Home</PageTitle>
 
 <h1>Hello there!</h1>
 
 Welcome to ISafeBank Online Page. Log in to see more!
+
+@if (TokenHolder.role == "admin")
+{
+    <h3>Hello Mr.Admin</h3>
+    <a href="/logs">Check Logs</a>
+}

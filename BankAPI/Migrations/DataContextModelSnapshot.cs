@@ -21,7 +21,7 @@ namespace BankAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Shared.DBObjects.CryptedAccountData", b =>
+            modelBuilder.Entity("Shared.DBObjects.AccountData.CryptedAccountData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,7 @@ namespace BankAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Shared.DBObjects.CryptedAccountStatus", b =>
+            modelBuilder.Entity("Shared.DBObjects.AccountStatus.CryptedAccountStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,48 +94,24 @@ namespace BankAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CryptedInfo = "hrnR0Hvz9bDBaOqtKTD8T8WHGEl5mJA6Q1i9RE5jKEpJAy1WmVq82kVapmVySwVM7CpDZ3sUfNcW+YrmxrUv2mjdwIYTkQLdyW3kaRHT0olFmSXBOkVmo0BSCZpqRbvE",
+                            CryptedInfo = "hrnR0Hvz9bDBaOqtKTD8T9BXuGkKpwNYzUI+zTpZNEXmbnbEuQ4LeI77xFGyplVkPGCa9L6ePHuaoDwz8GP5ltLqjHLPjOl+nyipZCLjUMNpLfASRNlCLMSIirKN/oH7",
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CryptedInfo = "hrnR0Hvz9bDBaOqtKTD8T8WHGEl5mJA6Q1i9RE5jKEoWdu6ZpVheZKpOdLru/uCzjQCoAyBdRZ945loCctYJiqILqFvs3aNY+lUw2xN5T/eM7zXl8fBTLZLuH5Qak114",
+                            CryptedInfo = "hrnR0Hvz9bDBaOqtKTD8T9BXuGkKpwNYzUI+zTpZNEUPLiiGlrRfnJ0sihGHnGUYGLsqLeFfPFFVv2IR5EALwWmFYPwq8MTdkZMKAuB/p8BTRtvro9WwmawLM2hCzE3+",
                             UserId = 2
                         },
                         new
                         {
                             Id = 3,
-                            CryptedInfo = "hrnR0Hvz9bDBaOqtKTD8T8WHGEl5mJA6Q1i9RE5jKEqxoilWwdn2qmydxCShlty7pGs5AFJR1ziZT71XnMPo50AoMIH4DA7Dfb6Hz0kTL1Suc5L1+/obo0YuT0tE45WC",
+                            CryptedInfo = "hrnR0Hvz9bDBaOqtKTD8T9BXuGkKpwNYzUI+zTpZNEUV78fBeo/53SF228KstmKq5xGXLSBUSq1ISj+kxeJjB/eCDfQRAFRKA3RlBSS+ePX7XXEeGom9dKhyoOQgD01d",
                             UserId = 3
                         });
                 });
 
-            modelBuilder.Entity("Shared.DBObjects.CryptedLogData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CryptedInfo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Logs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CryptedInfo = "PPfQrALMIQrHfWui0uoXGXxeXNv6b9MP4OckRNUJjpYrbw592WxQ7ei9jxLRlwMa9OwXcopIFgldUavdXy6HZQGxm2bP4T+PiVhYbs5u1ppcKssEe/y4sUwMIgGNRXwPltjZfEXRbLle4bt8WpmC9Q=="
-                        });
-                });
-
-            modelBuilder.Entity("Shared.DBObjects.CryptedTransfer", b =>
+            modelBuilder.Entity("Shared.DBObjects.TransferData.CryptedTransfer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,6 +147,30 @@ namespace BankAPI.Migrations
                             Address = 3,
                             CryptedInfo = "17Ekpj5CXERlXjlD1IJXe04vrjsg91U7X8xvs3gpx1+OWfX3KGTVqI3Bq+4ilavWdDKSJ46HgArhqxhXyycVbhOLxtx7pOHgbUs6fFNV1v7iPVA2TOMNZPrFiRWE8eLC",
                             Sender = 2
+                        });
+                });
+
+            modelBuilder.Entity("SharedClass.DBObjects.Logs.CryptedLogData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CryptedInfo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CryptedInfo = "PPfQrALMIQrHfWui0uoXGXxeXNv6b9MP4OckRNUJjpazzTlyWODkpbM2FQDH+lW5xyMHeq1z2jiL6k4Ul2b/Cq399mcAf/8JmNUQnFQ+KWl0mFC9y+bg8Ke1A5hkqYE9AW6DeNjf7OSj1k8FRfPhxg=="
                         });
                 });
 #pragma warning restore 612, 618

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Options;
+using SharedClass;
 using SharedClass.ClientObjects;
 using SharedClass.Services;
 
@@ -31,6 +32,7 @@ var authUrlBuilder = new UriBuilder(appSettingsSection.BaseAPIUrl)
 builder.Services.AddHttpClient<IAuthClient, AuthClient>(client => client.BaseAddress = authUrlBuilder.Uri);
 
 
+builder.Services.AddScoped<PasswordChecker>();
 builder.Services.AddSingleton<IOptions<AppSettings>>(new OptionsWrapper<AppSettings>(appSettingsSection));
 builder.Services.AddSingleton<TokenHolder>();
 

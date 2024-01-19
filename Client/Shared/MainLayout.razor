@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject TokenHolder TokenHolder
 
 <div class="page">
     <div class="sidebar">
@@ -9,7 +12,12 @@
         <div class="top-row px-4">
             <AuthorizeView>
                 <Authorized>
-                    <h1>Hello</h1>
+                    <div>
+                        Hello 
+                        @context.User.Identity.Name
+                    </div>
+
+                    <a href="#" @onclick="Logout">Logout</a>
                 </Authorized>
                 <NotAuthorized>
                     <a href="/Login">Login</a>
@@ -21,3 +29,18 @@
         </article>
     </main>
 </div>
+
+@code{
+
+    protected override async Task OnInitializedAsync()
+    {
+        await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    }
+
+    private async Task Logout()
+    {
+        await TokenHolder.ClearToken();
+        StateHasChanged();
+        NavigationManager.NavigateTo("/Login");
+    }
+}

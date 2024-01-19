@@ -1,7 +1,67 @@
 ﻿@page "/makeTransfer"
 
+@attribute [Authorize]
+@inject IBankClient IBankClient
+
 <h3>MakeTransfer</h3>
 
-@code {
+@if (!success)
+{
+	<EditForm Model="formData" OnValidSubmit="makeTransfer">
+		<p>Account number:</p>
+		<InputText @bind-Value="formData.AdressAccountNum" id="accnum"></InputText>
+		<p>First name:</p>
+		<InputText @bind-Value="formData.AdressFirstName" id="fname"></InputText>
+		<p>Last name:</p>
+		<InputText @bind-Value="formData.AdressLastName" id="lname"></InputText>
+		<p>Title:</p>
+		<InputText @bind-Value="formData.Title" id="title"></InputText>
+		<p>Price:</p>
+		<InputNumber @bind-Value="formData.Price" id="price"></InputNumber>
 
+		<button class="btn btn-primary" type="submit">Make transfer</button>
+	</EditForm>
+}
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <h3>@message</h3>
+}
+<img hidden="@(!isLoading)" src="spinner.gif" />
+
+@code {
+	string message = string.Empty;
+	bool next = false;
+	bool isLoading = false;
+	bool success = false;
+
+	TransferForm formData=new TransferForm();
+
+	private async Task makeTransfer()
+	{
+		isLoading = true;
+		formData.TimeStamp = DateTime.Now;
+
+		ValidationContext context = new ValidationContext(formData);
+		List<ValidationResult> validationResults = new List<ValidationResult>();
+		bool valid = Validator.TryValidateObject(formData, context, validationResults, true);
+		if (!valid)
+		{
+			isLoading = false;
+			message = "Data is invalid";
+			return;
+		}
+		var res = await IBankClient.MakeTransfers(formData);
+		if (res.Success)
+		{
+			success = true;
+			message = "Your transfer was sent";
+		}
+		else
+		{
+			message = res.Message;
+		}
+		isLoading = false;
+	
+	}
 }

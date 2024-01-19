@@ -1,7 +1,67 @@
 ﻿@page "/logs"
 
+@attribute [Authorize(Roles ="admin")]
+@inject IAuthClient IAuthClient
+
 <h3>LogsPage</h3>
+@if(!string.IsNullOrEmpty(message) || logs.Count==0)
+{
+    <h3>@message</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Who</th>
+                <th>When</th>
+                <th>Is Error</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (LogData log in logs)
+            {
+                <tr>
+                    <td>@(i++)</td>
+                    <td>@log.Who</td>
+                    <td>@log.When</td>
+                    <td>@log.IsError</td>
+                    <td>@log.Message</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<img hidden="@(!isLoading)" src="spinner.gif" />
 
 @code {
+    private bool isLoading = false;
+    private List<LogData> logs=new List<LogData>();
+    private int i=0;
+    private string message=string.Empty;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    async Task LoadData()
+    {
+        isLoading = true;
+        i = 1;
+        var res = await IAuthClient.GetLogs();
+        if (!res.Success)
+        {
+            message = res.Message;
+        }
+        else
+        {
+            message = string.Empty;
+            logs = res.Data;
+        }
+        isLoading = false;
+    }
 }

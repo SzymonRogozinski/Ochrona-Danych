@@ -857,3 +857,4 @@ C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\bin\Debug\net6.0\Shar
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\bin\Debug\net6.0\SharedClass.pdb
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\obj\Debug\net6.0\compressed\qwrf1v2krg.gz
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\obj\Debug\net6.0\compressed\qjr3965xqb.gz
+C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\obj\Debug\net6.0\Client.sourcelink.json

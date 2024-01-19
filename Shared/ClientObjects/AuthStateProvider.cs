@@ -13,6 +13,7 @@ namespace SharedClass.ClientObjects
 		public AuthStateProvider(TokenHolder tokenHolder)
 		{
 			_tokenHolder = tokenHolder;
+			_tokenHolder.setAuthProvider(this);
 		}
 
 		public override async Task<AuthenticationState> GetAuthenticationStateAsync()

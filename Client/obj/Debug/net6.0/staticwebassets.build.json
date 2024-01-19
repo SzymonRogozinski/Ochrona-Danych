@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CzYjaAECrKydkYXac4xVkJy4RkOz4Fa5TRFitmVq6mM=",
+  "Hash": "F3YMd7F9AWm3/IkrnNZlxxfG3EGY6J9Ew4PbY3mfzZc=",
   "Source": "Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -8318,6 +8318,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\sample-data\\weather.json"
+    },
+    {
+      "Identity": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Client\\wwwroot\\spinner.gif",
+      "SourceId": "Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "spinner.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\spinner.gif"
     }
   ]
 }

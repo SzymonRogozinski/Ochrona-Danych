@@ -81,6 +81,10 @@
       "PackagePath": "staticwebassets\\sample-data\\weather.json"
     },
     {
+      "Id": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Client\\wwwroot\\spinner.gif",
+      "PackagePath": "staticwebassets\\spinner.gif"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Client.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

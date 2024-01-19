@@ -1,39 +1,133 @@
 ﻿@page "/Login"
-@using System.ComponentModel.DataAnnotations
+
+@inject IAuthClient AuthClient
+@inject TokenHolder _TokenHolder
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
 
 <h3>Login page</h3>
 
-<EditForm Model="userNameQuestionary" OnValidSubmit="xxx">
-	<p>Username:</p>
-	<InputText @bind-Value="userNameQuestionary.value" id="value"></InputText>
+@if (!next)
+{
+	<EditForm Model="userNameQuestionary" OnValidSubmit="template">
+		<p>Username:</p>
+		<InputText @bind-Value="userNameQuestionary.value" id="value"></InputText>
 
-	<button class="btn btn-primary" type="submit">x</button>
-</EditForm>
+		<button class="btn btn-primary" type="submit">next</button>
+	</EditForm>
+}
+else
+{
+	<EditForm Model="loginQuestionary" OnValidSubmit="login">
+		<p>Password:</p>
+		<div id="firstPart">
+			@for(int i = 0; i < loginQuestionary.template.Length; i++)
+			{
+				int j = i;
+				if (pass[j] == '\0')
+				{
+					<input id=@j style="width:2rem;" type="password" @bind-value=pass[j] hidden=@(passBlock[j]) maxlength="1" />
+				}
+				else if (pass[j] == '*')
+				{
+					<input id=@j style="width:2rem;" type="password" @bind-value=pass[j] disabled=@(passBlock[j]) maxlength="1" />
+				}
+				else 
+				{
+					<input id=@i style="width:2rem;" type="password" @bind-value=pass[j] maxlength="1" />
+				}
+			}
+		</div>
+		<button class="btn btn-primary" type="submit">log in</button>
+	</EditForm>
+}
 
+<h3>@message</h3>
 
-<h1>@(tt?"yey":"ney")</h1>
-<h1>@err</h1>
-
-
+<img hidden="@(!isLoading)" src="spinner.gif" />
 
 @code {
-	string test = "";
-	bool tt = false;
-	string err = "";
+	string message = string.Empty;
+	bool next = false;
+	bool isLoading=false;
 
+	private char[] pass;
+	private bool[] passBlock;
 	private UserNameQuestionary userNameQuestionary = new UserNameQuestionary();
+	private LoginQuestionary loginQuestionary = new LoginQuestionary();
 
-	private async Task xxx()
+	private async Task template()
 	{
-		try
+		isLoading = true;
+		ValidationContext context = new ValidationContext(userNameQuestionary);
+		List<ValidationResult> validationResults = new List<ValidationResult>();
+		bool valid = Validator.TryValidateObject(userNameQuestionary, context, validationResults, true);
+		if (!valid)
 		{
-			ValidationContext context = new ValidationContext(userNameQuestionary);
-			List<ValidationResult> validationResults = new List<ValidationResult>();
-			tt = Validator.TryValidateObject(userNameQuestionary, context, validationResults, true);
-
-		} catch (Exception e)
-		{
-			err = e.Message;
+			isLoading = false;
+			message = "Data is invalid";
+			return;
 		}
+		var res = await AuthClient.GetTemplate(userNameQuestionary);
+		if (res.Success)
+		{
+			loginQuestionary.template = res.Data;
+			loginQuestionary.userName = userNameQuestionary.value;
+
+			pass = new char[loginQuestionary.template.Length];
+			passBlock = new bool[loginQuestionary.template.Length];
+
+			setTemplate();
+			next = true;
+			message = string.Empty;
+		}
+		else
+		{
+			message = "Response error";
+		}
+		isLoading = false;
+	}
+
+	private void setTemplate()
+	{
+		int i=0;
+		string tmp = loginQuestionary.template;
+		for (; i < tmp.Length; i++)
+		{
+			if (tmp[i] == '*')
+			{
+				passBlock[i] = true;
+				pass[i] = '*';
+			}
+		}
+	}
+
+	private async Task login()
+	{
+		isLoading = true;
+		string password = new string(pass).Substring(0,loginQuestionary.template.Length);
+		loginQuestionary.password = password;
+		ValidationContext context = new ValidationContext(loginQuestionary);
+		List<ValidationResult> validationResults = new List<ValidationResult>();
+		bool valid = Validator.TryValidateObject(loginQuestionary, context, validationResults, true);
+		if (!valid)
+		{
+			isLoading = false;
+			message = "Data is invalid";
+			return;
+		}
+		var res = await AuthClient.Login(loginQuestionary);
+		if (res.Success)
+		{
+			_TokenHolder.token = res.Data;
+			await AuthenticationStateProvider.GetAuthenticationStateAsync();
+			NavigationManager.NavigateTo("/");
+
+		}
+		else
+		{
+			message = res.Message;
+		}
+		isLoading = false;
 	}
 }

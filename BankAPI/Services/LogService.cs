@@ -1,6 +1,6 @@
 ﻿using BankAPI.Context;
 using Microsoft.EntityFrameworkCore;
-using Shared.DBObjects.Logs;
+using SharedClass.DBObjects.Logs;
 
 namespace BankAPI.Services
 {

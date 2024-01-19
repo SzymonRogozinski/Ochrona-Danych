@@ -1,7 +1,67 @@
 ﻿@page "/transfersView"
 
+@attribute [Authorize]
+@inject IBankClient IBankClient
+
 <h3>TransfersPage</h3>
+@if (!string.IsNullOrEmpty(message) || transferList.Count == 0)
+{
+    <h3>@message</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Who</th>
+                <th>When</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TransferInfo transfer in transferList)
+            {
+                <tr>
+                    <td>@(i++)</td>
+                    <td>@transfer.Title</td>
+                    <td>@(transfer.FirstName+" " +transfer.LastName)</td>
+                    <td>@transfer.TimeStamp</td>
+                    <td>@(transfer.IsSender?transfer.Price:transfer.Price*(-1))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<img hidden="@(!isLoading)" src="spinner.gif" />
 
 @code {
+    private bool isLoading = false;
+    private List<TransferInfo> transferList = new List<TransferInfo>();
+    private int i = 0;
+    private string message = string.Empty;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    async Task LoadData()
+    {
+        isLoading = true;
+        i = 1;
+        var res = await IBankClient.GetTransfers();
+        if (!res.Success)
+        {
+            message = res.Message;
+        }
+        else
+        {
+            message = string.Empty;
+            transferList = res.Data;
+        }
+        isLoading = false;
+    }
 }

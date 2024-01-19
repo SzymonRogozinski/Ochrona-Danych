@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Shared.DBObjects.AccountData;
 using Shared.DBObjects.AccountStatus;
-using Shared.DBObjects.Logs;
 using Shared.DBObjects.TransferData;
+using SharedClass.DBObjects.Logs;
 using System.Security.Cryptography;
 using System.Text;
 

@@ -14,7 +14,7 @@ namespace SharedClass.ClientObjects
 		public string AdressLastName { get; set; }
 		[Required, RegularExpression("^[a-zA-ZęóąśłżźćńĘÓĄŚŁŻŹĆŃ1234567890 .,]+$", ErrorMessage = "Title contains illegal char!")]
 		public string Title { get; set; }
-		[Required, Range(0, double.MaxValue, ErrorMessage = "Price must be positive!")]
+		[Required, Range(0.01, double.MaxValue, ErrorMessage = "Price must be positive!")]
 		public double Price { get; set; }
 		[Required]
 		public DateTime TimeStamp { get; set; }

@@ -67,3 +67,4 @@ C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Tests\obj\Debug\net7.0\Tests
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Tests\obj\Debug\net7.0\ref\Tests.dll
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Tests\bin\Debug\net7.0\SharedClass.dll
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Tests\bin\Debug\net7.0\SharedClass.pdb
+C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Tests\obj\Debug\net7.0\Tests.sourcelink.json

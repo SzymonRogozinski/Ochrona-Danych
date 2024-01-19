@@ -1,7 +1,105 @@
 ﻿@page "/details"
 
+@attribute [Authorize]
+@inject IBankClient IBankClient
+
 <h3>Details</h3>
 
+@if (dataLoad)
+{
+    <div>
+        <div class="form-group">
+            <label id="username1">Username:</label>
+            <label id="username2">@info.UserName</label>
+        </div>
+        <div class="form-group">
+            <label id="accnum1">Account number:</label>
+            <label id="accnum2">@info.AccountNumber</label>
+        </div>
+        <div class="form-group">
+            <label id="fname1">First name:</label>
+            <label id="fname2">@info.FirstName</label>
+        </div>
+        <div class="form-group">
+            <label id="lname1">Last name:</label>
+            <label id="lname2">@info.LastName</label>
+        </div>
+        <div class="form-group">
+            <label id="balance1">Balance:</label>
+            <label id="balance2">@info.Balance</label>
+        </div>
+        <div class="form-group">
+            <label id="email1">Email:</label>
+            <label id="email2">@info.Email</label>
+        </div>
+        <div class="form-group">
+            <label id="pesel1">Pesel:</label>
+            <label id="pesel2">@info.Pesel</label>
+        </div>
+        <b>Card info</b>
+        <div class="form-group">
+            <label id="cardnum1">Card number:</label>
+            <label id="cardnum2">@info.CardNumber</label>
+        </div>
+        <div class="form-group">
+            <label id="cardexp1">Card Expire:</label>
+            <label id="cardexp2">@info.CardExp</label>
+        </div>
+        <div class="form-group">
+            <label id="cardcsc1">Card CSC:</label>
+            <label id="cardcsc2">@info.CardCSC</label>
+        </div>
+    </div>
+}
+else if (!string.IsNullOrEmpty(message))
+{
+    <h3>@message</h3>
+}
+else
+{
+    <p>If you click button below, you will see your provate data, are you ready?</p>
+    <button @onclick=GetPrivateDetails>Yes</button>
+}
+
+<img hidden="@(!isLoading)" src="spinner.gif" />
+
 @code {
+    private bool isLoading = false;
+    private AccountInfo info;
+    private bool dataLoad = false;
+    private string message = string.Empty;
+    Thread hideThread;
+
+    protected async Task GetPrivateDetails()
+    {
+        isLoading = true;
+        var res = await IBankClient.GetDetails();
+        if (!res.Success)
+        {
+            message = res.Message;
+        }
+        else
+        {
+            message = string.Empty;
+            info = res.Data;
+            dataLoad = true;
+
+            //Thread config
+            Task.Run(async () =>
+            {
+                Thread.Sleep(15000);
+                HideDetails();
+            });
+        }
+        isLoading = false;
+
+    }
+
+    void HideDetails()
+    {
+        info = null;
+        dataLoad = false;
+        StateHasChanged();
+    }
 
 }

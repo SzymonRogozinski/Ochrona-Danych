@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Shared.DBObjects.AccountData;
 using SharedClass;
+using SharedClass.ClientObjects;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -13,6 +14,7 @@ namespace BankAPI.Services
 	{
 		public Task<ServiceResponse<string>> GetTemplate(string userName, string adress);
 		public Task<ServiceResponse<string>> GetToken(string template, string userName, string password, string adress);
+		public Task<ServiceResponse<bool>> ChangePassword(PasswordChangeForm form, string username);
 	}
 
 	public class AuthService : IAuthService
@@ -123,6 +125,128 @@ namespace BankAPI.Services
 					Success = false,
 				};
 			}
+		}
+
+		public async Task<ServiceResponse<bool>> ChangePassword(PasswordChangeForm form, string username)
+		{
+			try
+			{
+				var userExist = await UserExist(username);
+				if (!userExist)
+				{
+					await _logService.AddLog($"ChangePassword:{username}", true, "Account don't exist!");
+					return new ServiceResponse<bool>
+					{
+						Success = false,
+					};
+				}
+				var acc = await _context.Accounts.FirstAsync(user => user.UserName == username);
+				var unAcc = Cryptographer.Decrypt(acc);
+
+				//Check old password
+				string password = CheckOldPassword(form.oldPassword, unAcc.Passwords[0].PasswordTempalte);
+
+				//Wrong password?
+				if (!VerifyPasswordHash(password.ToString(), unAcc.Passwords[0].PasswordValue, unAcc.PasswordSalt))
+				{
+					return new ServiceResponse<bool>
+					{
+						Message = "Old password is wrong!",
+						Success = false,
+					};
+				}
+
+				//Create new password template
+				var passwords = CreateNewPasswordTemplate(form.newPassword);
+				//Update passwords
+				_context.ChangeTracker.Clear();
+
+				unAcc.Passwords = passwords.ToArray();
+
+				var copyId = acc.Id;
+				//Copy
+				var newAccountData = Cryptographer.Encrypt(unAcc);
+				newAccountData.Id = copyId;
+
+				var updatedAccountData = new CryptedAccountData() { Id = copyId };
+				_context.Accounts.Attach(updatedAccountData);
+
+				updatedAccountData.UserName = newAccountData.UserName;
+				updatedAccountData.CryptedInfo = newAccountData.CryptedInfo;
+				updatedAccountData.AccountNumber = newAccountData.AccountNumber;
+
+				await _context.SaveChangesAsync();
+
+				return new ServiceResponse<bool>
+				{
+					Success = true
+				};
+
+			}
+			catch (Exception e)
+			{
+				await _logService.AddLog($"ChangePassword:{username}", true, e.Message);
+				return new ServiceResponse<bool>
+				{
+					Success = false,
+				};
+			}
+		}
+
+		private string CheckOldPassword(string oldPassword, string template)
+		{
+			char[] passChars = oldPassword.ToCharArray();
+			for (int i = 0; i < template.Length; i++)
+			{
+				if (template[i] == '*')
+				{
+					passChars[i] = '*';
+				}
+			}
+			return new string(passChars);
+		}
+
+		private List<Password> CreateNewPasswordTemplate(string password)
+		{
+			var result = new List<Password>();
+			int len = password.Length;
+			Random random = new Random();
+			var salt = Encoding.ASCII.GetBytes("QWERTYXD");
+			var hmac = new System.Security.Cryptography.HMACSHA512(salt);
+			//How many new passwords
+			for (int iter = 0; iter < 5; iter++)
+			{
+				char[] passwordSliced = password.ToCharArray();
+				bool[] passwordHiddenChars = new bool[len];
+				int count = 0;
+				//Creating new password
+				while (count < len / 2)
+				{
+					int position = random.Next(len);
+					if (!passwordHiddenChars[position])
+					{
+						passwordHiddenChars[position] = true;
+						passwordSliced[position] = '*';
+						count++;
+					}
+				}
+				//Hash new password
+				string hidePassword = new string(passwordSliced);
+				byte[] passwordValue = hmac.ComputeHash(Encoding.ASCII.GetBytes(hidePassword));
+				//Get template
+				string template = "";
+				foreach (bool b in passwordHiddenChars)
+				{
+					template += b ? '*' : ' ';
+				}
+				result.Add(new Password()
+				{
+					PasswordValue = passwordValue,
+					PasswordTempalte = template
+				});
+			}
+			return result;
+
 		}
 
 		private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)

@@ -13,7 +13,7 @@ namespace BankAPI.Controllers
 	[ApiController]
 	public class BankController : Controller
 	{
-		private readonly static int SlowedDown = 3000;
+		private readonly static int Delay = 3000;
 		private readonly string nameType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
 		private readonly IBankService _bankService;
 		private readonly ILogService _logService;
@@ -28,6 +28,7 @@ namespace BankAPI.Controllers
 		[HttpGet("getTransfers")]
 		public async Task<ActionResult<ServiceResponse<List<TransferInfo>>>> GetTransfers()
 		{
+			Thread.Sleep(Delay);
 			var auth = Request.Headers.Authorization;
 			string username = GetUsername(auth);
 			//Illegal token?
@@ -62,7 +63,7 @@ namespace BankAPI.Controllers
 		[HttpPost("makeTransfer")]
 		public async Task<ActionResult<ServiceResponse<bool>>> MakeTransfer(TransferForm form)
 		{
-			Thread.Sleep(SlowedDown);
+			Thread.Sleep(Delay);
 			var auth = Request.Headers.Authorization;
 			string username = GetUsername(auth);
 			//Illegal token?
@@ -90,7 +91,7 @@ namespace BankAPI.Controllers
 				new ServiceResponse<bool>
 				{
 					Success = result.Success,
-					Message = result.Success ? "Ok" : "Ups, something go wrong!"
+					Message = result.Message == null ? "Ok" : result.Message
 				});
 		}
 
@@ -98,7 +99,7 @@ namespace BankAPI.Controllers
 		[HttpGet("seeDetails")]
 		public async Task<ActionResult<ServiceResponse<AccountInfo>>> SeeDetails()
 		{
-			Thread.Sleep(SlowedDown);
+			Thread.Sleep(Delay);
 			var auth = Request.Headers.Authorization;
 			string username = GetUsername(auth);
 			//Illegal token?
@@ -107,7 +108,7 @@ namespace BankAPI.Controllers
 				await _logService.AddLog($"SeeDetails:{username}", true, "User sent request with username that don'texist!");
 				return BadRequest
 					(
-					new ServiceResponse<string>
+					new ServiceResponse<AccountInfo>
 					{
 						Success = false,
 						Message = "Ups, something go wrong!"

@@ -73,7 +73,7 @@ namespace BankAPI.Services
 				transferList = await _context.Transfers.Where(t => t.Address == clientData.Id).ToListAsync();
 				foreach (var tran in transferList)
 				{
-					CryptedAccountData adress = await _context.Accounts.FindAsync(tran.Address);
+					CryptedAccountData adress = await _context.Accounts.FindAsync(tran.Sender);
 
 					var uncryptedAdd = Cryptographer.Decrypt(adress);
 					var uncryptedTran = Cryptographer.DecryptTransfer(tran);
@@ -104,8 +104,9 @@ namespace BankAPI.Services
 			{
 				//Check if data is correct
 				var addres = await _context.Accounts.FirstAsync(a => a.AccountNumber == form.AdressAccountNum);
-				var uncryptAdr = Cryptographer.Decrypt(addres);
-				if (uncryptAdr.FirstName != form.AdressFirstName || uncryptAdr.LastName != form.AdressLastName)
+
+				var uncryptAdresser = Cryptographer.Decrypt(addres);
+				if (uncryptAdresser.FirstName != form.AdressFirstName || uncryptAdresser.LastName != form.AdressLastName)
 				{
 					return new ServiceResponse<bool>()
 					{
@@ -155,9 +156,9 @@ namespace BankAPI.Services
 
 				await _context.SaveChangesAsync();
 				//Add adresser money
-				uncryptAdr.Balance += form.Price;
+				uncryptAdresser.Balance += form.Price;
 				copyId = addres.Id;
-				var newAddres = Cryptographer.Encrypt(uncryptoSender);
+				var newAddres = Cryptographer.Encrypt(uncryptAdresser);
 				newAddres.Id = copyId;
 
 				var updatedAdd = new CryptedAccountData() { Id = copyId };
@@ -174,11 +175,20 @@ namespace BankAPI.Services
 					Data = true
 				};
 			}
+			catch (InvalidOperationException ioe)
+			{
+				return new ServiceResponse<bool>()
+				{
+					Message = "Adress doesn't exist!",
+					Success = false,
+				};
+			}
 			catch (Exception e)
 			{
 				await _logService.AddLog($"MakeTransfer:{username}", true, e.Message);
 				return new ServiceResponse<bool>()
 				{
+					Message = "Ups, something go wrong!",
 					Success = false
 				};
 
