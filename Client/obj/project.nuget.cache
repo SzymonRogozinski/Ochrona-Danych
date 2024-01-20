@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WNTEUGu3d1D8FAiyT0Ai2TEZ0tIEHidfHplTwX/2h2rwu5dYGM2wB7lZN41cvSvBdN4ux3CX5hDUQI+GXvZPJA==",
+  "dgSpecHash": "8DDnK4i1lGeIl/nQFRfuXunsBbBl96ModeRGbPtBor5cuInP4+wAEsFgJYNCkKkcWWmk08Oyhn3MNhr86Z18lQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Client\\Client.csproj",
+  "projectFilePath": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\Client\\Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.26\\microsoft.aspnetcore.authorization.6.0.26.nupkg.sha512",
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.26\\microsoft.aspnetcore.components.6.0.26.nupkg.sha512",

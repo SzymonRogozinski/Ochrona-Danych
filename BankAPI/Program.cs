@@ -52,6 +52,8 @@ builder.Services.AddSwaggerGen(swagger =>
 
 var cd = builder.Configuration.GetConnectionString("DefaultConnection");
 
+builder.Services.AddSingleton<Cryptographer>();
+
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

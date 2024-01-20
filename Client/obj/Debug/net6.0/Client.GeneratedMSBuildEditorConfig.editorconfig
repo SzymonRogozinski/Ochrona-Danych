@@ -13,59 +13,59 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = Client
 build_property.RootNamespace = Client
-build_property.ProjectDir = C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\
+build_property.ProjectDir = C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client
+build_property.MSBuildProjectDirectory = C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/App.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Pages/AdminPage/LogsPage.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Pages/AdminPage/LogsPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5QYWdlXExvZ3NQYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Pages/ChangePasswordPage.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Pages/ChangePasswordPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hhbmdlUGFzc3dvcmRQYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Pages/Details.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Pages/Details.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Pages/Index.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Pages/LoginPage.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Pages/LoginPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5QYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Pages/MakeTransfer.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Pages/MakeTransfer.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFrZVRyYW5zZmVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Pages/TransfersPage.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Pages/TransfersPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhbnNmZXJzUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Shared/SurveyPrompt.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/_Imports.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Shared/MainLayout.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-ocnk4r8tjs
 
-[C:/Users/RetailAdmin/Desktop/Ochrona danych Projekt/Client/Shared/NavMenu.razor]
+[C:/Users/RetailAdmin/Desktop/ochrona-danych-projekt/Client/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-kd1ih0s86n

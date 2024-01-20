@@ -19,12 +19,14 @@ namespace BankAPI.Services
 		private readonly DataContext _context;
 		private readonly IConfiguration _config;
 		private readonly ILogService _logService;
+		private readonly Cryptographer _cryptographer;
 
-		public BankService(DataContext context, IConfiguration config, ILogService logService)
+		public BankService(DataContext context, IConfiguration config, ILogService logService, Cryptographer cryptographer)
 		{
 			this._context = context;
 			this._config = config;
 			this._logService = logService;
+			this._cryptographer = cryptographer;
 		}
 
 		public async Task<ServiceResponse<AccountInfo>> GetDetails(string username)
@@ -32,7 +34,7 @@ namespace BankAPI.Services
 			try
 			{
 				var res = await _context.Accounts.FirstAsync(user => user.UserName == username);
-				var resCut = new AccountInfo(Cryptographer.Decrypt(res));
+				var resCut = new AccountInfo(_cryptographer.Decrypt(res));
 
 				return new ServiceResponse<AccountInfo>()
 				{
@@ -64,8 +66,8 @@ namespace BankAPI.Services
 				{
 					CryptedAccountData adress = await _context.Accounts.FindAsync(tran.Address);
 
-					var uncryptedAdd = Cryptographer.Decrypt(adress);
-					var uncryptedTran = Cryptographer.DecryptTransfer(tran);
+					var uncryptedAdd = _cryptographer.Decrypt(adress);
+					var uncryptedTran = _cryptographer.DecryptTransfer(tran);
 					result.Add(new TransferInfo(uncryptedTran, uncryptedAdd.AccountNumber, uncryptedAdd.FirstName, uncryptedAdd.LastName, false));
 
 				}
@@ -75,8 +77,8 @@ namespace BankAPI.Services
 				{
 					CryptedAccountData adress = await _context.Accounts.FindAsync(tran.Sender);
 
-					var uncryptedAdd = Cryptographer.Decrypt(adress);
-					var uncryptedTran = Cryptographer.DecryptTransfer(tran);
+					var uncryptedAdd = _cryptographer.Decrypt(adress);
+					var uncryptedTran = _cryptographer.DecryptTransfer(tran);
 					result.Add(new TransferInfo(uncryptedTran, uncryptedAdd.AccountNumber, uncryptedAdd.FirstName, uncryptedAdd.LastName, true));
 
 				}
@@ -105,7 +107,7 @@ namespace BankAPI.Services
 				//Check if data is correct
 				var addres = await _context.Accounts.FirstAsync(a => a.AccountNumber == form.AdressAccountNum);
 
-				var uncryptAdresser = Cryptographer.Decrypt(addres);
+				var uncryptAdresser = _cryptographer.Decrypt(addres);
 				if (uncryptAdresser.FirstName != form.AdressFirstName || uncryptAdresser.LastName != form.AdressLastName)
 				{
 					return new ServiceResponse<bool>()
@@ -116,7 +118,7 @@ namespace BankAPI.Services
 				}
 				//Check if sender can pay it
 				var sender = await _context.Accounts.FirstAsync(a => a.UserName == username);
-				var uncryptoSender = Cryptographer.Decrypt(sender);
+				var uncryptoSender = _cryptographer.Decrypt(sender);
 				if (uncryptoSender.Balance < form.Price)
 				{
 					return new ServiceResponse<bool>()
@@ -134,7 +136,7 @@ namespace BankAPI.Services
 					Price = form.Price,
 					TimeStamp = DateTime.Now,
 				};
-				var cryptTran = Cryptographer.EncryptTransfer(tran);
+				var cryptTran = _cryptographer.EncryptTransfer(tran);
 
 				_context.ChangeTracker.Clear();
 
@@ -144,7 +146,7 @@ namespace BankAPI.Services
 				uncryptoSender.Balance -= form.Price;
 				var copyId = sender.Id;
 				//Copy
-				var newSender = Cryptographer.Encrypt(uncryptoSender);
+				var newSender = _cryptographer.Encrypt(uncryptoSender);
 				newSender.Id = copyId;
 
 				var updatedSender = new CryptedAccountData() { Id = copyId };
@@ -158,7 +160,7 @@ namespace BankAPI.Services
 				//Add adresser money
 				uncryptAdresser.Balance += form.Price;
 				copyId = addres.Id;
-				var newAddres = Cryptographer.Encrypt(uncryptAdresser);
+				var newAddres = _cryptographer.Encrypt(uncryptAdresser);
 				newAddres.Id = copyId;
 
 				var updatedAdd = new CryptedAccountData() { Id = copyId };

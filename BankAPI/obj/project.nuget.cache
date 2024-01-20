@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "N8SXoOM7A2ATh5d8VP4qfUc93xCGChrTPmwL+2PFyuFm0OAolH/P09obf/uov9MZbJdsgcyMK+L+UczITp602g==",
+  "dgSpecHash": "ToFIJ+JLrLzRC9hSzpgkG3HYlYz3qqTr2wk7TGO352J/MUkB7MXmimDLMJ7k+ii8fKfs8AwrdIt4obfZKyk8xw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\BankAPI\\BankAPI.csproj",
+  "projectFilePath": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\BankAPI\\BankAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

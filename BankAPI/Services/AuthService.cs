@@ -22,12 +22,14 @@ namespace BankAPI.Services
 		private readonly DataContext _context;
 		private readonly IConfiguration _config;
 		private readonly ILogService _logService;
+		private readonly Cryptographer _cryptographer;
 
-		public AuthService(DataContext context, IConfiguration config, ILogService logService)
+		public AuthService(DataContext context, IConfiguration config, ILogService logService, Cryptographer cryptographer)
 		{
 			this._context = context;
 			this._config = config;
 			this._logService = logService;
+			this._cryptographer = cryptographer;
 		}
 
 		public async Task<ServiceResponse<string>> GetTemplate(string username, string adress)
@@ -47,7 +49,7 @@ namespace BankAPI.Services
 				var rand = new Random();
 
 				var acc = await _context.Accounts.FirstAsync(user => user.UserName == username);
-				var uncryptAcc = Cryptographer.Decrypt(acc);
+				var uncryptAcc = _cryptographer.Decrypt(acc);
 				var template = uncryptAcc.Passwords[rand.Next(uncryptAcc.Passwords.Length)].PasswordTempalte;
 				return new ServiceResponse<string>
 				{
@@ -80,7 +82,7 @@ namespace BankAPI.Services
 					};
 				}
 				var acc = await _context.Accounts.FirstAsync(user => user.UserName == username);
-				var unAcc = Cryptographer.Decrypt(acc);
+				var unAcc = _cryptographer.Decrypt(acc);
 				//hash password
 				int i = 0;
 				byte[] pass = null;
@@ -141,7 +143,7 @@ namespace BankAPI.Services
 					};
 				}
 				var acc = await _context.Accounts.FirstAsync(user => user.UserName == username);
-				var unAcc = Cryptographer.Decrypt(acc);
+				var unAcc = _cryptographer.Decrypt(acc);
 
 				//Check old password
 				string password = CheckOldPassword(form.oldPassword, unAcc.Passwords[0].PasswordTempalte);
@@ -165,7 +167,7 @@ namespace BankAPI.Services
 
 				var copyId = acc.Id;
 				//Copy
-				var newAccountData = Cryptographer.Encrypt(unAcc);
+				var newAccountData = _cryptographer.Encrypt(unAcc);
 				newAccountData.Id = copyId;
 
 				var updatedAccountData = new CryptedAccountData() { Id = copyId };

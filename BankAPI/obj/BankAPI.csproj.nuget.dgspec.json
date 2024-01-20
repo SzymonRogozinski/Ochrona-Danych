@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\BankAPI\\BankAPI.csproj": {}
+    "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\BankAPI\\BankAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\BankAPI\\BankAPI.csproj": {
+    "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\BankAPI\\BankAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\BankAPI\\BankAPI.csproj",
+        "projectUniqueName": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\BankAPI\\BankAPI.csproj",
         "projectName": "BankAPI",
-        "projectPath": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\BankAPI\\BankAPI.csproj",
+        "projectPath": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\BankAPI\\BankAPI.csproj",
         "packagesPath": "C:\\Users\\RetailAdmin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\BankAPI\\obj\\",
+        "outputPath": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\BankAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Shared\\SharedClass.csproj": {
-                "projectPath": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Shared\\SharedClass.csproj"
+              "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\Shared\\SharedClass.csproj": {
+                "projectPath": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\Shared\\SharedClass.csproj"
               }
             }
           }
@@ -117,14 +117,14 @@
         }
       }
     },
-    "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Shared\\SharedClass.csproj": {
+    "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\Shared\\SharedClass.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Shared\\SharedClass.csproj",
+        "projectUniqueName": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\Shared\\SharedClass.csproj",
         "projectName": "SharedClass",
-        "projectPath": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Shared\\SharedClass.csproj",
+        "projectPath": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\Shared\\SharedClass.csproj",
         "packagesPath": "C:\\Users\\RetailAdmin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RetailAdmin\\Desktop\\Ochrona danych Projekt\\Shared\\obj\\",
+        "outputPath": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
