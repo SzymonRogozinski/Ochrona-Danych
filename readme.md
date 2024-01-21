@@ -36,27 +36,34 @@ Serwer został napisany przy wykorzystaniu frameworków EntityFrameworkCore oraz
 4. Politykę *CORS*.
 5. Ustawienia autentykacji w postaci żetonów JWT.
 
+Żetony JWT są podpisywane przy użyciu algorytmu HMAC w wersji 512 bitowej. Tego samego algorytmu używam do hashowania haseł.
+
 W aplikacji opisano 3 kontrolery obsługujące żądania:
 
 1. AuthorizationController - Jego celem jest obsługa kont użytkowników. Logowanie, zmiana hasła, reset hasła. Znajduję się tu też Endpoint pozwalający na wyświetlanie logów, jednakże jest dostępny tylko dla administracji.
 2. BankController - Jego celem jest dostarczenie użytkownikom usług bankowych, takich jak widok przelewów, wykonanie przelewu, podejrzenie danych wrażliwych. Wszystkie endpointy wymagają, aby użytkownik był zalogowany.
 3. HoneyPot - Jego celem jest wyłapanie podejrzanej aktywności, a nawet nałożenie blokady (Ban) na konto użytkownika o niecnych zamiarach. Udostępniono 11 fałszywych endpointów.
 
+Klucze, wartości inicjalizujące i sole do algorytmów szyfrujących i hashujących znajdują się w pliku **appsettings.json**.
+
 W projekcie znajduję się też klasa **DataContext**. Służy ona do zdefiniowania połączenia z bazą danych, a dokładnia za mapowanie obiektów C# na rekord w tabeli (i odwrotnie). Klasa ta, też zawiera metodę **OnModelCreating**, która odpowiada za wpisanie danych początkowych do bazy danych (Code first).  
 Pomimo iż stanowi to podatność, ponieważ otrzymanie kodu źródłowego serwera ujawni dane użytkowników tam podanych, musiałem pozostawić to w kodzie, aby dało się odtworzyć te dane na innej maszynie.  
 Rozwiązania tego problemu są dwa, albo nie korzystać z metody Code first, albo po migracji, usunąć metody dodające dane (jednak należy pamiętać, że wywołanie migracji, spowoduję utracenie tych danych).
 
+### Ograniczenia logowań
+Użytkownik ma 3 próby logowania, zanim nastąpi 5 minutowa blokada. Endpointy związane z logowaniem, zmianą hasła mają ustawione 5 sekundowe opóźnienie przy każdej próbie. Inne endpointy mają też je mają, ale jest krótsze, 2 sekundy.
+
 ## Aplikacja Kliencka
 
 Aplikacja kliencka została napisana przy wykorzystaniu Frameworku Blazor, a konkretniej Blazor WebAssembly. Jest ona w postaci aplikacji internetowej SPA. Używa ona domyślnego szkieletu tego typu aplikacji.  
-Aplikacja trzyma otrzymany żeton w pamięci (Klasa Token Holder) i dodaję go do żądań http.
+Aplikacja trzyma otrzymany żeton w pamięci (Klasa Token Holder) i dodaję go do żądań http.  
+Aplikacja posiada zaimplementowaną metodę wpisywania tylko wybranych znaków hasła.
 
 ## Biblioteka Shared
 
 Jest to trzeci projekt C#, który w przeciwieństwie do innych, nie może być samodzielnie uruchamiany. Zawiera ona klasy, służace do trzymania danych oraz dane służące do kontaktu między Klientem a Serwerem. Znajdują się tu też klasy, służące Aplikacji klienckiej do kontaktu z serwerem oraz klasa sprawdzająca siłę hasła.
 
 ## Dodatkowe uwagi
-
 
 ### Loginy i hasła użytkowników
 W bazie istnieją trzy konta:
@@ -83,6 +90,35 @@ Ostatecznie wynik (E) wynosi iloczy wyników powyższych dwóch etapów. Wynik l
 
 Ostateczna uwaga. Jeśli hasło nie zawiera dużych i małych liter, znaków specjalnych, liczb lub jest krótsze niż 8 znaków, jest uważane za hasło bardzo słabe, a zatem nieakceptowalne.
 
+### Dostępne Endpointy
+
+AuthorizationController:
+
+- api/Authorization/template [Post]
+- api/Authorization/login [Post]
+- api/Authorization/forgot [Post]
+- api/Authorization/logs [Get]
+- api/Authorization/change-password [Post]
+
+BankController:
+
+- api/Bank/getTransfers [Get]
+- api/Bank/makeTransfer [Post]
+- api/Bank/seeDetails [Get]
+
+**HoneyPot** (Wszystkie z nich uruchamiają tą samą metodę, dostępne są po Get):
+
+- static
+- config
+- main
+- passwords
+- logs
+- admin
+- index.php
+- .htaccess
+- login
+- wp-admin
+- wp-login.php
 
 ## Bibliografia
 

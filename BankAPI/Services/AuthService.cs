@@ -288,9 +288,9 @@ namespace BankAPI.Services
 							   expires: DateTime.Now.AddMinutes(30),
 							   signingCredentials: creds
 				  );
-			var xd = new JwtSecurityTokenHandler();
+			var writer = new JwtSecurityTokenHandler();
 
-			var tokenHandler = xd.WriteToken(token);
+			var tokenHandler = writer.WriteToken(token);
 			return tokenHandler;
 		}
 
