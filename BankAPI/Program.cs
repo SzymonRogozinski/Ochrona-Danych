@@ -50,6 +50,7 @@ builder.Services.AddSwaggerGen(swagger =>
 	});
 });
 
+builder.WebHost.UseKestrel(option => option.AddServerHeader = false);
 var cd = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddSingleton<Cryptographer>();
@@ -92,7 +93,7 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
 	app.UseSwaggerUI();

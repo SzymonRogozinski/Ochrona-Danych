@@ -49,7 +49,7 @@ namespace BankAPI.Controllers
 					});
 			}
 			//Succes
-			await _logService.AddLog($"GetTemplate:{UserName.value}/{adr}", false, "Ok");
+			await _logService.AddLog($"GetTemplate:{UserName.value}/{adr}", false, temp.Message == null ? "Ok" : temp.Message);
 			return Ok
 				(
 				new ServiceResponse<string>
@@ -70,6 +70,8 @@ namespace BankAPI.Controllers
 			var stat = await _statusService.GetStatus(loginInfo.userName);
 			if (stat != Statuses.OK)
 			{
+				string msg = stat == Statuses.PASSWORDS_TRIALS_OUT ? "You run out of password trials!" : "You have been blocked!";
+
 				return Ok
 					 (
 					 new ServiceResponse<string>
@@ -80,6 +82,7 @@ namespace BankAPI.Controllers
 			}
 
 			var temp = await _authService.GetToken(loginInfo.template, loginInfo.userName, loginInfo.password, adr);
+			//Hidden error
 			if (!temp.Success && string.IsNullOrEmpty(temp.Message))
 			{
 				return BadRequest
@@ -101,9 +104,9 @@ namespace BankAPI.Controllers
 			else if (temp.Success)
 			{
 				await _statusService.RestartTrials(loginInfo.userName);
+				await _logService.AddLog($"Login:{loginInfo.userName}/{adr}", false, "Ok");
 			}
 			//Succes
-			await _logService.AddLog($"Login:{loginInfo.userName}/{adr}", false, "Ok");
 			return Ok
 				(
 				new ServiceResponse<string>
@@ -114,11 +117,82 @@ namespace BankAPI.Controllers
 				});
 		}
 
+		[HttpPost("forgot")]
+		public async Task<ActionResult<ServiceResponse<bool>>> forgotPassword(UserNameQuestionary UserName)
+		{
+			Thread.Sleep(LongDelay);
+
+			var adr = Request.Headers.Origin;
+
+			var stat = await _statusService.GetStatus(UserName.value);
+			if (stat != Statuses.OK)
+			{
+				string msg = stat == Statuses.PASSWORDS_TRIALS_OUT ? "You run out of password trials!" : "You have been blocked!";
+
+				return Ok
+					 (
+					 new ServiceResponse<bool>
+					 {
+						 Success = false,
+						 Message = "You run out of password trials!"
+					 });
+			}
+
+			var temp = await _authService.GetTemplate(UserName.value, adr);
+			if (!temp.Success)
+			{
+				return BadRequest
+						(
+						new ServiceResponse<bool>
+						{
+							Success = false,
+							Message = "Ups, something go wrong!"
+						});
+			}
+			await _logService.AddLog($"ChangingPassword:{UserName.value}/{adr}", false, "User request to restore his password. Control word \"Okoń\"");
+			return Ok
+				(
+				new ServiceResponse<bool>
+				{
+					Data = true,
+					Success = true,
+					Message = "Your request for password restoring was accepted. Go to the closest IBank location and give secret word: \"Okoń\".",
+				});
+
+		}
+
 		[Authorize(Roles = "admin")]
 		[HttpGet("logs")]
 		public async Task<ActionResult<ServiceResponse<List<LogData>>>> Logs()
 		{
 			Thread.Sleep(ShortDelay);
+			var auth = Request.Headers.Authorization;
+			string username = GetUsername(auth);
+			//Illegal token?
+			if (username == null)
+			{
+				await _logService.AddLog($"Logs:{username}", true, "User sent request with username that don'texist!");
+				return BadRequest
+					(
+					new ServiceResponse<List<LogData>>
+					{
+						Success = false,
+						Message = "Ups, something go wrong!"
+					});
+			}
+			var stat = await _statusService.GetStatus(username);
+			if (stat != Statuses.OK)
+			{
+				string msg = stat == Statuses.PASSWORDS_TRIALS_OUT ? "You run out of password trials!" : "You have been blocked!";
+				await _logService.AddLog($"Logs:{username}", true, msg);
+				return Ok
+					 (
+					 new ServiceResponse<List<LogData>>
+					 {
+						 Success = false,
+						 Message = "You run out of password trials!"
+					 });
+			}
 			try
 			{
 				var logs = await _logService.GetLogs();
@@ -156,6 +230,20 @@ namespace BankAPI.Controllers
 						Success = false,
 						Message = "Ups, something go wrong!"
 					});
+			}
+			var stat = await _statusService.GetStatus(username);
+			if (stat != Statuses.OK)
+			{
+				string msg = stat == Statuses.PASSWORDS_TRIALS_OUT ? "You run out of password trials!" : "You have been blocked!";
+				await _logService.AddLog($"ChangePassword:{username}", true, msg);
+
+				return Ok
+					 (
+					 new ServiceResponse<bool>
+					 {
+						 Success = false,
+						 Message = "You run out of password trials!"
+					 });
 			}
 
 			var passCheck = _passwordChecker.FullPasswordCheck(form.newPassword);

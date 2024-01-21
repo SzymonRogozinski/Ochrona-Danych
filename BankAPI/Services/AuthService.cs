@@ -6,6 +6,7 @@ using SharedClass;
 using SharedClass.ClientObjects;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BankAPI.Services
@@ -23,6 +24,8 @@ namespace BankAPI.Services
 		private readonly IConfiguration _config;
 		private readonly ILogService _logService;
 		private readonly Cryptographer _cryptographer;
+		private byte[] salt;
+		private readonly RNGCryptoServiceProvider rng;
 
 		public AuthService(DataContext context, IConfiguration config, ILogService logService, Cryptographer cryptographer)
 		{
@@ -30,6 +33,7 @@ namespace BankAPI.Services
 			this._config = config;
 			this._logService = logService;
 			this._cryptographer = cryptographer;
+			this.rng = new RNGCryptoServiceProvider();
 		}
 
 		public async Task<ServiceResponse<string>> GetTemplate(string username, string adress)
@@ -98,7 +102,8 @@ namespace BankAPI.Services
 				//Not find template
 				if (pass == null)
 				{
-					//Illegal state, propably attack
+					await _logService.AddLog($"GetToken", false, "Attack Alert!");
+					await _logService.AddLog($"GetToken:{username}/{adress}", true, "Cannot found password template!");
 					return new ServiceResponse<string>
 					{
 						Success = false,
@@ -164,6 +169,7 @@ namespace BankAPI.Services
 				_context.ChangeTracker.Clear();
 
 				unAcc.Passwords = passwords.ToArray();
+				unAcc.PasswordSalt = salt;
 
 				var copyId = acc.Id;
 				//Copy
@@ -213,8 +219,11 @@ namespace BankAPI.Services
 			var result = new List<Password>();
 			int len = password.Length;
 			Random random = new Random();
-			var salt = Encoding.ASCII.GetBytes("QWERTYXD");
-			var hmac = new System.Security.Cryptography.HMACSHA512(salt);
+
+			this.salt = new byte[8];
+			rng.GetBytes(salt);
+			var hmac = new HMACSHA512(salt);
+
 			//How many new passwords
 			for (int iter = 0; iter < 5; iter++)
 			{
@@ -255,7 +264,7 @@ namespace BankAPI.Services
 		{
 			using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
 			{
-				var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+				var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 				return computedHash.SequenceEqual(passwordHash);
 			}
 		}

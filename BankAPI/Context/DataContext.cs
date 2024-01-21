@@ -4,6 +4,7 @@ using Shared.DBObjects.AccountData;
 using Shared.DBObjects.AccountStatus;
 using Shared.DBObjects.TransferData;
 using SharedClass.DBObjects.Logs;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BankAPI.Context
@@ -11,9 +12,13 @@ namespace BankAPI.Context
 	public class DataContext : DbContext
 	{
 		private readonly Cryptographer _cryptographer;
-		public DataContext(DbContextOptions<DataContext> options, Cryptographer cryptographer) : base(options)
+		private readonly IConfiguration _config;
+		private readonly RNGCryptoServiceProvider rng;
+		public DataContext(DbContextOptions<DataContext> options, Cryptographer cryptographer, IConfiguration config) : base(options)
 		{
 			_cryptographer = cryptographer;
+			_config = config;
+			this.rng = new RNGCryptoServiceProvider();
 		}
 
 		public DbSet<CryptedTransfer> Transfers { get; set; }
@@ -38,8 +43,9 @@ namespace BankAPI.Context
 
 		private List<CryptedAccountData> AddAccounts()
 		{
-			var salt = Encoding.ASCII.GetBytes("QWERTYXD");
-			var hmac = new System.Security.Cryptography.HMACSHA512(salt);
+			var salt = new byte[8];
+			rng.GetBytes(salt);
+			var hmac = new HMACSHA512(salt);
 			var result = new List<CryptedAccountData>();
 			//First account - Basia
 			List<Password> ps = new List<Password>();
@@ -79,6 +85,8 @@ namespace BankAPI.Context
 			result.Add(cac);
 
 			//Second account - Krzysztof
+			salt = new byte[8];
+			rng.GetBytes(salt);
 			ps = new List<Password>();
 			ps.Add(new Password()
 			{
@@ -116,6 +124,8 @@ namespace BankAPI.Context
 			result.Add(cac);
 
 			//Third account - Admin
+			salt = new byte[8];
+			rng.GetBytes(salt);
 			ps = new List<Password>();
 			ps.Add(new Password()
 			{

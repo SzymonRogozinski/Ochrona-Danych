@@ -9,6 +9,7 @@ namespace SharedClass.Services
 	public interface IAuthClient
 	{
 		Task<ServiceResponse<string>> GetTemplate(UserNameQuestionary UserName);
+		Task<ServiceResponse<bool>> ForgetPassword(UserNameQuestionary UserName);
 		Task<ServiceResponse<string>> Login(LoginQuestionary loginInfo);
 		Task<ServiceResponse<List<LogData>>> GetLogs();
 		Task<ServiceResponse<bool>> ChangePassword(PasswordChangeForm form);
@@ -63,6 +64,34 @@ namespace SharedClass.Services
 			catch (Exception e)
 			{
 				return new ServiceResponse<string>()
+				{
+					Success = false,
+					Message = "Something goes wrong!"
+				};
+			}
+		}
+
+		public async Task<ServiceResponse<bool>> ForgetPassword(UserNameQuestionary UserName)
+		{
+			isTokenChanged();
+			try
+			{
+				var response = await _httpClient.PostAsJsonAsync(_appSettings.AuthEndpoint.ForgetPassword, UserName);
+
+				if (!response.IsSuccessStatusCode)
+				{
+					return new ServiceResponse<bool>()
+					{
+						Success = false,
+						Message = "Something goes wrong!"
+					};
+				}
+				var data = await response.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
+				return data;
+			}
+			catch (Exception e)
+			{
+				return new ServiceResponse<bool>()
 				{
 					Success = false,
 					Message = "Something goes wrong!"

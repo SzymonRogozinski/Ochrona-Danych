@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ToFIJ+JLrLzRC9hSzpgkG3HYlYz3qqTr2wk7TGO352J/MUkB7MXmimDLMJ7k+ii8fKfs8AwrdIt4obfZKyk8xw==",
+  "dgSpecHash": "zNOOPWWWTEiktc0cAgfrxUGHVInAZ93IVjDrddWMokU4JLjDvYpLlilNqJC7tVjCW4taD7f9Y4fBQ0kh5BUdZg==",
   "success": true,
   "projectFilePath": "C:\\Users\\RetailAdmin\\Desktop\\ochrona-danych-projekt\\BankAPI\\BankAPI.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.1.2\\microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\RetailAdmin\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\RetailAdmin\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",

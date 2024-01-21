@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
+using Shared.DBObjects.AccountStatus;
 using SharedClass;
 using SharedClass.ClientObjects;
 using System.Security.Claims;
@@ -17,11 +18,13 @@ namespace BankAPI.Controllers
 		private readonly string nameType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
 		private readonly IBankService _bankService;
 		private readonly ILogService _logService;
+		private readonly IStatusService _statusService;
 
-		public BankController(IBankService bankService, ILogService logService)
+		public BankController(IBankService bankService, ILogService logService, IStatusService statusService)
 		{
 			this._bankService = bankService;
 			this._logService = logService;
+			this._statusService = statusService;
 		}
 
 		[Authorize]
@@ -42,6 +45,20 @@ namespace BankAPI.Controllers
 						Success = false,
 						Message = "Ups, something go wrong!"
 					});
+			}
+			var stat = await _statusService.GetStatus(username);
+			if (stat != Statuses.OK)
+			{
+				string msg = stat == Statuses.PASSWORDS_TRIALS_OUT ? "You run out of password trials!" : "You have been blocked!";
+				await _logService.AddLog($"GetTransfers:{username}", true, msg);
+
+				return Ok
+					 (
+					 new ServiceResponse<List<TransferInfo>>
+					 {
+						 Success = false,
+						 Message = "You run out of password trials!"
+					 });
 			}
 			var res = await _bankService.GetTransfers(username);
 			if (res.Success)
@@ -78,7 +95,20 @@ namespace BankAPI.Controllers
 						Message = "Ups, something go wrong!"
 					});
 			}
+			var stat = await _statusService.GetStatus(username);
+			if (stat != Statuses.OK)
+			{
+				string msg = stat == Statuses.PASSWORDS_TRIALS_OUT ? "You run out of password trials!" : "You have been blocked!";
+				await _logService.AddLog($"MakeTransfer:{username}", true, msg);
 
+				return Ok
+					 (
+					 new ServiceResponse<bool>
+					 {
+						 Success = false,
+						 Message = "You run out of password trials!"
+					 });
+			}
 			var result = await _bankService.MakeTransfer(form, username);
 
 			if (!string.IsNullOrEmpty(result.Message))
@@ -113,6 +143,20 @@ namespace BankAPI.Controllers
 						Success = false,
 						Message = "Ups, something go wrong!"
 					});
+			}
+			var stat = await _statusService.GetStatus(username);
+			if (stat != Statuses.OK)
+			{
+				string msg = stat == Statuses.PASSWORDS_TRIALS_OUT ? "You run out of password trials!" : "You have been blocked!";
+				await _logService.AddLog($"SeeDetails:{username}", true, msg);
+
+				return Ok
+					 (
+					 new ServiceResponse<AccountInfo>
+					 {
+						 Success = false,
+						 Message = "You run out of password trials!"
+					 });
 			}
 			var res = await _bankService.GetDetails(username);
 

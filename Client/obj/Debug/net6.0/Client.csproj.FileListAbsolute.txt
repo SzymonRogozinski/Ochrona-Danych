@@ -858,7 +858,10 @@ C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\bin\Debug\net6.0\Shar
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\obj\Debug\net6.0\compressed\qwrf1v2krg.gz
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\obj\Debug\net6.0\compressed\qjr3965xqb.gz
 C:\Users\RetailAdmin\Desktop\Ochrona danych Projekt\Client\obj\Debug\net6.0\Client.sourcelink.json
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\blazor.boot.json
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\blazor.webassembly.js
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Client.dll
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Client.pdb
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\dotnet.6.0.25.u4xugvfbjq.js
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\dotnet.timezones.blat
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\dotnet.wasm
@@ -901,6 +904,8 @@ C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwr
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\mscorlib.dll
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\netstandard.dll
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Newtonsoft.Json.dll
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\SharedClass.dll
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\SharedClass.pdb
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.AppContext.dll
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Buffers.dll
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Collections.Concurrent.dll
@@ -1081,6 +1086,7 @@ C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwr
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Text.RegularExpressions.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Runtime.Handles.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Dynamic.Runtime.dll.gz
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\SharedClass.pdb.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.IO.Compression.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Microsoft.Extensions.DependencyInjection.Abstractions.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Authorization.dll.gz
@@ -1101,6 +1107,7 @@ C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwr
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Collections.Specialized.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Forms.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Reflection.Metadata.dll.gz
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Client.pdb.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Private.Runtime.InteropServices.JavaScript.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Microsoft.Extensions.Logging.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Collections.Concurrent.dll.gz
@@ -1152,6 +1159,7 @@ C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwr
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.IO.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Console.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Xml.XPath.XDocument.dll.gz
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\SharedClass.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Reflection.Emit.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.ValueTuple.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Net.Http.Json.dll.gz
@@ -1217,6 +1225,7 @@ C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwr
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\icudt_CJK.dat.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Collections.Immutable.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Net.ServicePoint.dll.gz
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Client.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Xml.XDocument.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Text.Encoding.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Microsoft.IdentityModel.Logging.dll.gz
@@ -1234,6 +1243,7 @@ C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwr
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Net.HttpListener.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\dotnet.6.0.25.u4xugvfbjq.js.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Security.dll.gz
+C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\blazor.boot.json.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Collections.NonGeneric.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Reflection.Extensions.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Reflection.DispatchProxy.dll.gz
@@ -1266,16 +1276,6 @@ C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwr
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Numerics.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.ComponentModel.dll.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\System.Runtime.Serialization.Json.dll.gz
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\blazor.boot.json
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Client.dll
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Client.pdb
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\SharedClass.dll
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\SharedClass.pdb
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\SharedClass.pdb.gz
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Client.pdb.gz
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\SharedClass.dll.gz
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\Client.dll.gz
-C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\wwwroot\_framework\blazor.boot.json.gz
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\Client.staticwebassets.runtime.json
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\Client.dll
 C:\Users\RetailAdmin\Desktop\ochrona-danych-projekt\Client\bin\Debug\net6.0\Client.pdb

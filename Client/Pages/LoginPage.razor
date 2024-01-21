@@ -38,8 +38,10 @@ else
 				}
 			}
 		</div>
+		<br/>
 		<button class="btn btn-primary" type="submit">log in</button>
 	</EditForm>
+	<button class="btn btn-secondary" type="" @onclick=forget>Forget password?</button>
 }
 
 <h3>@message</h3>
@@ -128,6 +130,24 @@ else
 		{
 			message = res.Message;
 		}
+		isLoading = false;
+	}
+
+
+	private async Task forget()
+	{
+		isLoading = true;
+		ValidationContext context = new ValidationContext(userNameQuestionary);
+		List<ValidationResult> validationResults = new List<ValidationResult>();
+		bool valid = Validator.TryValidateObject(userNameQuestionary, context, validationResults, true);
+		if (!valid)
+		{
+			isLoading = false;
+			message = "Data is invalid";
+			return;
+		}
+		var res = await AuthClient.ForgetPassword(userNameQuestionary);
+		message = res.Message;
 		isLoading = false;
 	}
 }

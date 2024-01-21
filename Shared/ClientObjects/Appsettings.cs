@@ -16,6 +16,7 @@
 		public string RegisterEndpoint { get; set; }
 		public string ChangePasswordEndpoint { get; set; }
 		public string GetLogsEndpoint { get; set; }
+		public string ForgetPassword { get; set; }
 	}
 
 	public class BankEndpoint
